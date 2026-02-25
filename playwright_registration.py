@@ -3,7 +3,9 @@ from playwright.sync_api import sync_playwright, expect
 
 with sync_playwright() as playwright:
     browser = playwright.chromium.launch(headless=False)
-    page = browser.new_page()
+    context = browser.new_context()
+    page = context.new_page()
+
 
     page.goto('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/registration')
 
@@ -16,10 +18,21 @@ with sync_playwright() as playwright:
     password_input = page.locator('//div[@data-testid="registration-form-password-input"]//div//input') #Для разнообразия использую XPATH (В целях повторить материал)
     password_input.fill('password')
 
-    button_registration = page.locator('button')
+    button_registration = page.get_by_test_id('registration-page-registration-button')
     button_registration.click()
 
     header_dashboard = page.get_by_test_id('dashboard-toolbar-title-text')
     expect(header_dashboard).to_be_visible()
+
+    context.storage_state(path='browser-state.json')
+
+with sync_playwright() as playwright:
+    browser = playwright.chromium.launch(headless=False)
+    context = browser.new_context(storage_state='browser-state.json')
+    page = context.new_page()
+
+    page.goto('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/dashboard')
+
+    page.wait_for_timeout(5000)
 
 
