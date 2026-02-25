@@ -21,8 +21,6 @@ with sync_playwright() as playwright:
     button_registration = page.get_by_test_id('registration-page-registration-button')
     button_registration.click()
 
-    header_dashboard = page.get_by_test_id('dashboard-toolbar-title-text')
-    expect(header_dashboard).to_be_visible()
 
     context.storage_state(path='browser-state.json')
 
@@ -31,7 +29,22 @@ with sync_playwright() as playwright:
     context = browser.new_context(storage_state='browser-state.json')
     page = context.new_page()
 
-    page.goto('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/dashboard')
+    page.goto('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/courses')
+
+    header_courses = page.get_by_test_id('courses-list-toolbar-title-text')
+    expect(header_courses).to_be_visible()
+    expect(header_courses).to_have_text('Courses')
+
+    block_there_is_no_results = page.get_by_test_id('courses-list-empty-view-title-text')
+    expect(block_there_is_no_results).to_be_visible()
+    expect(block_there_is_no_results).to_have_text('There is no results')
+
+    icon_block = page.get_by_test_id('courses-list-empty-view-icon')
+    expect(icon_block).to_be_visible()
+
+    block_results_from_the_load_test = page.get_by_test_id('courses-list-empty-view-description-text')
+    expect(block_results_from_the_load_test).to_be_visible()
+    expect(block_results_from_the_load_test).to_have_text('Results from the load test pipeline will be displayed here')
 
     page.wait_for_timeout(5000)
 
