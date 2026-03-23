@@ -1,10 +1,16 @@
 from pages.base_page import BasePage
 from playwright.sync_api import Page, expect
+from components.navigation.sidebar_component import SidebarComponent
+from components.navigation.navbar_component import NavbarComponent
 
 
 class CoursesListPage(BasePage):
     def __init__(self, page: Page):
         super().__init__(page)
+
+        self.sidebar = SidebarComponent(page)
+
+        self.navbar = NavbarComponent(page)
 
         self.courses_title = page.get_by_test_id('courses-list-toolbar-title-text')
         self.create_course_button = page.get_by_test_id('courses-list-toolbar-create-course-button')
@@ -45,12 +51,12 @@ class CoursesListPage(BasePage):
         expect(self.create_course_button).to_be_visible()
 
     def check_visible_course_card(
-            self,
-            index: int,
-            title: str,
-            max_score: str,
-            min_score: str,
-            estimated_time: str
+        self,
+        index: int,
+        title: str,
+        max_score: str,
+        min_score: str,
+        estimated_time: str
     ):
         expect(self.course_image.nth(index)).to_be_visible()
 

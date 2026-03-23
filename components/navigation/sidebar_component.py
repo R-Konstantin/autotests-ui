@@ -8,7 +8,7 @@ from components.navigation.sidebar_list_item_component import SidebarListItemCom
 
 class SidebarComponent(BaseComponent):
     def __init__(self, page: Page):
-        super.__init__(page)
+        super().__init__(page)
 
         self.logout_list_item = SidebarListItemComponent(page, 'logout')
         self.courses_list_item = SidebarListItemComponent(page, 'courses')
