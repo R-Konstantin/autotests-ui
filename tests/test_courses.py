@@ -23,7 +23,7 @@ def test_create_course(courses_list_page: CoursesListPage, create_course_page: C
 
     create_course_page.toolbar_view.check_visible()
     create_course_page.image_upload_widget.check_visible(False)
-    create_course_page.create_course_form_input.check_visible(
+    create_course_page.create_course_form.check_visible(
         title='',
         estimated_time='',
         description='',
@@ -36,7 +36,7 @@ def test_create_course(courses_list_page: CoursesListPage, create_course_page: C
 
     create_course_page.image_upload_widget.upload_preview_image('./testdata/files/image.png')
     create_course_page.image_upload_widget.check_visible(True)
-    create_course_page.create_course_form_input.fill(
+    create_course_page.create_course_form.fill(
         title='Playwright',
         description='Playwright',
         estimated_time='2 weeks',
