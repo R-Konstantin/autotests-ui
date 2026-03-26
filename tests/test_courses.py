@@ -21,10 +21,9 @@ def test_empty_courses_list(courses_list_page: CoursesListPage):
 def test_create_course(courses_list_page: CoursesListPage, create_course_page: CreateCoursePage):
     create_course_page.visit('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/courses/create')
 
-    create_course_page.check_visible_create_course_title()
-    create_course_page.check_disabled_create_course_button()
+    create_course_page.toolbar_view.check_visible()
     create_course_page.image_upload_widget.check_visible(False)
-    create_course_page.check_visible_create_course_form(
+    create_course_page.create_course_form_input.check_visible(
         title='',
         estimated_time='',
         description='',
@@ -32,13 +31,12 @@ def test_create_course(courses_list_page: CoursesListPage, create_course_page: C
         min_score="0"
     )
 
-    create_course_page.check_visible_exercises_title()
-    create_course_page.check_visible_exercises_button()
+    create_course_page.exercises_toolbar_view.check_visible()
     create_course_page.check_visible_exercises_empty_view()
 
     create_course_page.image_upload_widget.upload_preview_image('./testdata/files/image.png')
     create_course_page.image_upload_widget.check_visible(True)
-    create_course_page.fill_create_course_form(
+    create_course_page.create_course_form_input.fill(
         title='Playwright',
         description='Playwright',
         estimated_time='2 weeks',
@@ -46,7 +44,7 @@ def test_create_course(courses_list_page: CoursesListPage, create_course_page: C
         min_score="10"
     )
 
-    create_course_page.click_create_course_button()
+    create_course_page.toolbar_view.click_create_course_button()
 
     courses_list_page.toolbar_view.check_visible()
 
