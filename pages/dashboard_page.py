@@ -11,16 +11,13 @@ class DashboardPage(BasePage):
     def __init__(self, page: Page):
         super().__init__(page)
 
-        self.sidebar = SidebarComponent(page)
-
         self.navbar = NavbarComponent(page)
-
+        self.sidebar = SidebarComponent(page)
+        self.scores_chart = ChartViewComponent(page, 'scores', 'scatter')
+        self.courses_chart = ChartViewComponent(page, 'courses', 'pie')
+        self.students_chart = ChartViewComponent(page, 'students', 'bar')
+        self.activities_chart = ChartViewComponent(page, 'activities', 'line')
         self.dashboard_toolbar_view = DashboardToolbarViewComponent(page)
-
-        self.students_chart = ChartViewComponent(page, "students", "bar")
-        self.activities_chart = ChartViewComponent (page, 'activities', 'line')
-        self.courses_chart = ChartViewComponent(page, "courses", "pie")
-        self.scores_chart = ChartViewComponent(page, "scores", "scatter")
 
     def check_visible_students_chart(self):
         self.students_chart.check_visible('Students')
