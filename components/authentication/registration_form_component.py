@@ -32,3 +32,4 @@ class RegistrationFormComponent(BaseComponent):
         self.password_input.check_visible()
         self.password_input.check_have_value(password)
 
+
