@@ -2,7 +2,7 @@ from components.courses.course_view_component import CourseViewComponent
 from components.courses.courses_list_toolbar_view_component import CoursesListTollbarViewComponent
 from components.views.empty_view_component import EmptyViewComponent
 from pages.base_page import BasePage
-from playwright.sync_api import Page, expect
+from playwright.sync_api import Page
 from components.navigation.sidebar_component import SidebarComponent
 from components.navigation.navbar_component import NavbarComponent
 
