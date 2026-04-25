@@ -4,7 +4,7 @@ import allure
 
 from tools.logger import get_logger
 
-logger = get_logger("BASE_PAGE" )
+logger = get_logger("BASE_PAGE")
 
 class BasePage:
     def __init__(self, page: Page):
