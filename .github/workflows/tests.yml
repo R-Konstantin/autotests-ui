@@ -10,6 +10,9 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+
 
 jobs:
   run-tests:
@@ -49,7 +52,7 @@ jobs:
 
 
       - name: Generates Allure Report with history
-        uses: simple-elf/allure-report-action@v1.9
+        uses: simple-elf/allure-report-action@master
         if: always()
         with:
           allure_results: allure-results
