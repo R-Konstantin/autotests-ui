@@ -58,6 +58,10 @@ jobs:
           allure_results: allure-results
           allure_history: allure-history
 
+      - name: Fix permissions on allure-history
+        if: always()
+        run: sudo chown -R $USER:$USER allure-history
+
 
       - name: Deploy report to Github Pages
         if: always()
