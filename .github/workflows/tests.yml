@@ -48,45 +48,44 @@ jobs:
           name: allure-results
           path: allure-results
 
-  jobs:
-    publish-report:
-      needs: run-tests
-      runs-on: ubuntu-latest
+  publish-report:
+    needs: run-tests
+    runs-on: ubuntu-latest
 
-      steps:
+    steps:
 
-        - name: Download Allure results
-          uses: actions/download-artifact@v4
-          with:
-            name: allure-results
-            path: allure-results
-
-
-        - name: Get Allure history
-          uses: actions/checkout@v4
-          if: always()
-          continue-on-error: true
-          with:
-            ref: gh-pages
-            path: gh-pages
+      - name: Download Allure results
+        uses: actions/download-artifact@v4
+        with:
+          name: allure-results
+          path: allure-results
 
 
-        - name: Generates Allure Report with history
-          uses: simple-elf/allure-report-action@master
-          if: always()
-          with:
-            allure_results: allure-results
-            allure_history: allure-history
-
-        - name: Fix permissions on allure-history
-          if: always()
-          run: sudo chown -R $USER:$USER allure-history
+      - name: Get Allure history
+        uses: actions/checkout@v4
+        if: always()
+        continue-on-error: true
+        with:
+          ref: gh-pages
+          path: gh-pages
 
 
-        - name: Deploy report to Github Pages
-          if: always()
-          uses: peaceiris/actions-gh-pages@v4
-          with:
-            github_token: ${{ secrets.GITHUB_TOKEN }}
-            publish_branch: gh-pages
-            publish_dir: allure-history
+      - name: Generates Allure Report with history
+        uses: simple-elf/allure-report-action@master
+        if: always()
+        with:
+          allure_results: allure-results
+          allure_history: allure-history
+
+      - name: Fix permissions on allure-history
+        if: always()
+        run: sudo chown -R $USER:$USER allure-history
+
+
+      - name: Deploy report to Github Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: allure-history
